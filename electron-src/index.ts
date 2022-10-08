@@ -6,21 +6,29 @@ import { format } from 'url'
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron'
 import isDev from 'electron-is-dev'
 import prepareNext from 'electron-next'
+import {
+  getWindowBounds,
+  setWindowBounds
+} from '../renderer/utils/windowBoundsController'
 
 // Prepare the renderer once the app is ready
 app.on('ready', async () => {
   await prepareNext('./renderer')
 
   const mainWindow = new BrowserWindow({
-    width: 800,
+    ...getWindowBounds(),
     minWidth: 800,
-    height: 600,
     minHeight: 600,
+    frame: false,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: false,
       preload: join(__dirname, 'preload.js'),
     },
+  })
+
+  mainWindow.on('close', () => {
+    setWindowBounds(mainWindow?.getBounds())
   })
 
   const url = isDev

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import Link from "next/link";
 import Layout from "../components/Layout";
 import { GlobalStyle } from "../theme/globalStyle";
+import { Login } from "../components/Login";
+import { defaultTheme } from "../theme/theme";
 
 const IndexPage = () => {
   useEffect(() => {
@@ -20,15 +21,9 @@ const IndexPage = () => {
   };
 
   return (
-    <Layout title="Home | Next.js + TypeScript + Electron Example">
-      <h1>Hello Next.js 👋</h1>
-      <button onClick={onSayHiClick}>Say hi to electron</button>
-      <p>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </p>
-      <GlobalStyle />
+    <Layout title="Login | Coffee Shop">
+      <Login />
+      <GlobalStyle theme={defaultTheme} />
     </Layout>
   );
 };

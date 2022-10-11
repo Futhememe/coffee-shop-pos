@@ -64,10 +64,21 @@ export const Form = styled.form`
   }
 
   input {
+    @keyframes border {
+      0%   {border: 2px solid #e7e7e7}
+      100% {border: 2px solid #0F9565}
+    } 
+
     width: 100%;
     padding: 10px;
-    border: 1px solid #E7E7E7;
+    border: 2px solid #E7E7E7;
     border-radius: 6px;
+
+    :focus {
+      animation-name: border;
+      animation-duration: 0.2s;
+      border: 2px solid #0F9565;
+    }
   }
 
   div {
